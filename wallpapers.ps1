@@ -18,6 +18,11 @@ $CDM_Folder = $home + "\AppData\Local\Packages\Microsoft.Windows.ContentDelivery
 $added = "Images have been added  =)"
 $not_added = "There are no new Images  =("
 
+function OpenImagesFolder
+{
+    Invoke-Item $ImagesFolder
+}
+
 function Balloon-PopUp
 {
     
@@ -31,8 +36,12 @@ function Balloon-PopUp
     $balloon.BalloonTipTitle = "$ImagesFolder" 
     $balloon.Visible = $true 
     $balloon.ShowBalloonTip(5000)
+    # $balloon.BalloonTipClicked += [System.EventHandler](Balloon-Clicked)
+    
 
 }
+
+
 
 
 # check if C:\Temp\Images folder already exists
@@ -81,6 +90,9 @@ if (!$flag -eq 0)
 #    $Output = $wshell.Popup($added)
 
     Balloon-PopUp $added
+
+    # open Images Folder.
+    OpenImagesFolder
 
 }
 else
